@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calculator/pages/homepage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
+  await Hive.initFlutter();
+  await Hive.openBox('themeData');
   runApp(const MyApp());
 }
 
@@ -10,8 +13,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Homepage(),
-    );
+    return const Homepage();
   }
 }
