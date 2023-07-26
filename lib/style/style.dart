@@ -6,25 +6,29 @@ import 'package:hive/hive.dart';
 //light mode color
 Color textLight = const Color(0xff373737);
 Color bgLight = const Color(0xffF9F9F9);
-Color lightBlue = const Color(0xff5ACEFF);
-Color justBlue = const Color(0xff79AFFF);
+Color primaryLight = const Color(0xffA9DCFD);
+Color secondaryLight = const Color(0xffD8EEFF);
+List<Color> gradientLight = [const Color(0xff5ACEFF), const Color(0xff79AFFF)];
 
 //dark mode Color
 Color textDark = const Color(0xffFBFBFB);
 Color bgDark = const Color(0xff252628);
-Color darkBlue = const Color(0xff2A7DA1);
-Color darkestBlue = const Color(0xff2A7DA1);
+Color primaryDark = const Color(0xff1B6A9C);
+Color secondaryDark = const Color(0xff003661);
+List<Color> gradientDark = [const Color(0xff2A7DA1), const Color(0xff224E91)];
 
 // fonts
 TextStyle regular22 = GoogleFonts.poppins(
     textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400));
-TextStyle bold22 = GoogleFonts.poppins(
-    textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700));
+TextStyle medium22 = GoogleFonts.poppins(
+    textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w500));
+TextStyle semibold22 = GoogleFonts.poppins(
+    textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600));
 
 TextStyle regular26 = regular22.copyWith(fontSize: 26);
-TextStyle bold26 = bold22.copyWith(fontSize: 26);
+TextStyle semibold26 = semibold22.copyWith(fontSize: 26);
 
-TextStyle bold40 = bold22.copyWith(fontSize: 40);
+TextStyle semiBold40 = semibold22.copyWith(fontSize: 40);
 
 // theme data for apps
 
@@ -41,35 +45,33 @@ TextStyle bold40 = bold22.copyWith(fontSize: 40);
 // ThemeData lightTheme = ThemeData(
 
 // );
-// ThemeDatabase themeDatabase = ThemeDatabase();
-bool isDarkData = Hive.box('themeData').get('isDark');
+ThemeDatabase themeDatabase = ThemeDatabase();
+// bool isDarkData = Hive.box('themeData').get('isDark');
 
 class AppColor {
-  Color primary = isDarkData ? darkestBlue : justBlue;
-  Color secondary = isDarkData ? darkBlue : lightBlue;
-  Color textClor = isDarkData ? textDark : textLight;
-  Color background = isDarkData ? bgDark : bgLight;
+  Color primary = themeDatabase.isDark ? primaryDark : primaryLight;
+  Color secondary = themeDatabase.isDark ? secondaryDark : secondaryLight;
+  List<Color> gradient = themeDatabase.isDark ? gradientDark : gradientLight;
+  Color textColor = themeDatabase.isDark ? textDark : textLight;
+  Color background = themeDatabase.isDark ? bgDark : bgLight;
 
   ThemeDatabase database = ThemeDatabase();
-
-  // static Color primary = justBlue;
-  // static Color secondary = lightBlue;
-  // static Color textClor = textLight;
-  // static Color background = bgLight;
 
   void changeTheme() {
     // To change theme mode
     if (!database.isDark) {
       print('daaaarkkkk');
-      primary = darkestBlue;
-      secondary = darkBlue;
-      textClor = textDark;
+      primary = primaryDark;
+      secondary = secondaryDark;
+      gradient = gradientDark;
+      textColor = textDark;
       background = bgDark;
     } else {
       print('lightttttttt');
-      primary = justBlue;
-      secondary = lightBlue;
-      textClor = textLight;
+      primary = primaryLight;
+      secondary = secondaryLight;
+      gradient = gradientLight;
+      textColor = textLight;
       background = bgLight;
     }
     database.switchTheme();

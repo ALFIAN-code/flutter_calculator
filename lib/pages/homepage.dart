@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_calculator/component/calculator.dart';
+import 'package:flutter_calculator/component/theme_switch.dart';
 import 'package:flutter_calculator/style/style.dart';
 import 'package:flutter_calculator/style/theme_database.dart';
 import 'package:hive/hive.dart';
@@ -28,23 +30,91 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+    var deviceheight =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+
+    theme.loadTheme();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Container(
-          color: appColor.background,
-          child: Center(
-              child: GestureDetector(
-            onTap: () {
-              setState(() {
-                appColor.changeTheme();
-              });
-            },
-            child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                color: appColor.primary,
-                child: Text('is Dark = ${theme.isDark}')),
-          )),
+        backgroundColor: appColor.background,
+        body: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+
+              // theme toggle
+              Center(
+                child: ThemeSwitch(
+                  isDark: theme.isDark,
+                  primaryColor: appColor.primary,
+                  secondaryColor: appColor.secondary,
+                  onTap: () => setState(() {
+                    appColor.changeTheme();
+                  }),
+                ),
+              ),
+              const Expanded(
+                child: SizedBox(),
+              ),
+
+              // input text
+              Align(
+                alignment: Alignment.centerRight,
+                child:
+                    // TextField(
+                    //   style: medium22.copyWith(
+                    //       color: appColor.textColor.withOpacity(.5)),
+                    //   decoration: const InputDecoration(border: InputBorder.none),
+                    //   textAlign: TextAlign.right,
+                    // )
+                    Padding(
+                  padding: const EdgeInsets.only(right: 35),
+                  child: Text(
+                    '1.000 × 2 + 2 × 2',
+                    textAlign: TextAlign.right,
+                    style: medium22.copyWith(
+                        color: appColor.textColor.withOpacity(0.5)),
+                  ),
+                ),
+              ),
+
+              // result text
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 35),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '=',
+                        style: semibold26.copyWith(color: appColor.textColor),
+                      ),
+                    ),
+                    Text(
+                      '2004',
+                      style: semiBold40.copyWith(color: appColor.textColor),
+                    )
+                  ],
+                ),
+              ),
+
+              const SizedBox(
+                height: 20,
+              ),
+
+              // calculator button
+              CalculatorButton(
+                height: deviceheight * 0.6,
+                isDark: theme.isDark,
+                primaryColor: appColor.primary,
+                secondaryColor: appColor.secondary,
+              )
+            ],
+          ),
         ),
       ),
     );
