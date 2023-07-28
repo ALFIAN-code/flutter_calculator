@@ -108,6 +108,7 @@ class _HomepageState extends State<Homepage> {
 
               // calculator button
               CalculatorButton(
+                textColor: appColor.textColor,
                 height: deviceheight * 0.6,
                 isDark: theme.isDark,
                 primaryColor: appColor.primary,
