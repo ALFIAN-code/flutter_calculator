@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calculator/style/theme_database.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 
 //light mode color
 Color textLight = const Color(0xff373737);
@@ -75,5 +76,6 @@ class AppColor {
     }
     database.switchTheme();
     database.updateTheme();
+    print(Hive.box('themeData').get('isDark'));
   }
 }

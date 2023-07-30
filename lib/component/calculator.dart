@@ -82,7 +82,7 @@ class CalculatorButton extends StatelessWidget {
           Image.asset(
             isDark
                 ? 'lib/asset/background_dark.png'
-                : 'lib/asset/background_light2.jpg',
+                : 'lib/asset/background_light2.png',
             fit: BoxFit.cover,
             width: deviceheight * .6,
           ),
@@ -167,24 +167,44 @@ class CalculatorButton extends StatelessWidget {
                     child: Column(
                       children: [
                         Expanded(
-                          flex: 5,
-                          child: ListView.builder(
-                            itemCount: 3,
-                            itemBuilder: (context, index) {
-                              var i = index + 3;
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 25),
-                                child: Center(
-                                    child: Text(
-                                  operatorButtons[i],
+                            flex: 5,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  operatorButtons[3],
                                   style: semibold26.copyWith(
                                       color: textColor, fontSize: 30),
-                                )),
-                              );
-                            },
-                          ),
-                        ),
+                                ),
+                                Text(
+                                  operatorButtons[4],
+                                  style: semibold26.copyWith(
+                                      color: textColor, fontSize: 30),
+                                ),
+                                Text(
+                                  operatorButtons[5],
+                                  style: semibold26.copyWith(
+                                      color: textColor, fontSize: 30),
+                                ),
+                              ],
+                            )
+                            // ListView.builder(
+                            //   itemCount: 3,
+                            //   itemBuilder: (context, index) {
+                            //     var i = index + 3;
+                            //     return Padding(
+                            //       padding:
+                            //           const EdgeInsets.symmetric(vertical: 25),
+                            //       child: Center(
+                            //           child: Text(
+                            //         operatorButtons[i],
+                            //         style: semibold26.copyWith(
+                            //             color: textColor, fontSize: 30),
+                            //       )),
+                            //     );
+                            //   },
+                            // ),
+                            ),
                         Expanded(
                           flex: 3,
                           child: Container(
