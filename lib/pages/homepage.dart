@@ -92,14 +92,7 @@ class _HomepageState extends State<Homepage> {
               // input text
               Align(
                 alignment: Alignment.centerRight,
-                child:
-                    // TextField(
-                    //   style: medium22.copyWith(
-                    //       color: appColor.textColor.withOpacity(.5)),
-                    //   decoration: const InputDecoration(border: InputBorder.none),
-                    //   textAlign: TextAlign.right,
-                    // )
-                    Padding(
+                child: Padding(
                   padding: const EdgeInsets.only(right: 35),
                   child: Text(
                     _calculateFunction.userQuestion,
@@ -175,7 +168,7 @@ class _HomepageState extends State<Homepage> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,
                                           children: [
-                                            MyButtons(
+                                            OperatorButton(
                                                 onTap: () {
                                                   setState(() {
                                                     _calculateFunction
@@ -185,11 +178,25 @@ class _HomepageState extends State<Homepage> {
                                                 text: operatorButtons[0],
                                                 isDark: theme.isDark,
                                                 textColor: appColor.textColor),
-                                            MyButtons(
+                                            OperatorButton(
+                                                onTap: () {
+                                                  setState(() {
+                                                    _calculateFunction
+                                                        .addToUserQuestion(
+                                                            operatorButtons[1]);
+                                                  });
+                                                },
                                                 text: operatorButtons[1],
                                                 isDark: theme.isDark,
                                                 textColor: appColor.textColor),
-                                            MyButtons(
+                                            OperatorButton(
+                                                onTap: () {
+                                                  setState(() {
+                                                    _calculateFunction
+                                                        .addToUserQuestion(
+                                                            operatorButtons[2]);
+                                                  });
+                                                },
                                                 text: operatorButtons[2],
                                                 isDark: theme.isDark,
                                                 textColor: appColor.textColor),
@@ -215,11 +222,29 @@ class _HomepageState extends State<Homepage> {
                                                 horizontal: 12, vertical: 12),
                                             child: MyButtons(
                                                 onTap: () {
-                                                  // print('tapped');
                                                   setState(() {
-                                                    _calculateFunction
-                                                            .userQuestion +=
-                                                        numberButtons[index];
+                                                    if (numberButtons[index] ==
+                                                        '←') {
+                                                      if (_calculateFunction
+                                                              .userQuestion !=
+                                                          '') {
+                                                        _calculateFunction
+                                                                .userQuestion =
+                                                            _calculateFunction
+                                                                .userQuestion
+                                                                .substring(
+                                                                    0,
+                                                                    _calculateFunction
+                                                                            .userQuestion
+                                                                            .length -
+                                                                        1);
+                                                      }
+                                                    } else {
+                                                      _calculateFunction
+                                                          .addToUserQuestion(
+                                                              numberButtons[
+                                                                  index]);
+                                                    }
                                                     print(
                                                         'pertanyaannya ${_calculateFunction.userQuestion}');
                                                   });
@@ -256,14 +281,18 @@ class _HomepageState extends State<Homepage> {
                                         var i = index + 3;
                                         return Padding(
                                           padding: const EdgeInsets.symmetric(
-                                              vertical: 25),
-                                          child: Center(
-                                              child: Text(
-                                            operatorButtons[i],
-                                            style: semibold26.copyWith(
-                                                color: appColor.textColor,
-                                                fontSize: 30),
-                                          )),
+                                              vertical: 17),
+                                          child: OperatorButton(
+                                              onTap: () {
+                                                setState(() {
+                                                  _calculateFunction
+                                                      .addToUserQuestion(
+                                                          operatorButtons[i]);
+                                                });
+                                              },
+                                              text: operatorButtons[i],
+                                              isDark: themeDatabase.isDark,
+                                              textColor: appColor.textColor),
                                         );
                                       },
                                     ),

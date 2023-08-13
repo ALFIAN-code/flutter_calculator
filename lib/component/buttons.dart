@@ -25,11 +25,7 @@ class MyButtons extends StatelessWidget {
           child: Container(
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-              // boxShadow: [BoxShadow(color: Colors.grey.withOpacity(.1))],
               borderRadius: BorderRadius.circular(1000),
-              // color: isDark
-              //     ? const Color(0xff050505).withOpacity(.1)
-              //     : Colors.white.withOpacity(.1),
             ),
             child: Stack(children: [
               BlurEffect(
@@ -42,6 +38,42 @@ class MyButtons extends StatelessWidget {
                 ),
               ),
             ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class OperatorButton extends StatelessWidget {
+  const OperatorButton(
+      {super.key,
+      this.onTap,
+      required this.text,
+      required this.isDark,
+      required this.textColor});
+  final String text;
+  final bool isDark;
+  final Color textColor;
+  final void Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.all(10),
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(1000),
+          ),
+          child: Center(
+            child: Text(
+              text,
+              style: semibold26.copyWith(color: textColor),
+            ),
           ),
         ),
       ),

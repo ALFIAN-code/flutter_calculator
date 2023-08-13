@@ -7,4 +7,8 @@ class CalculateFunction {
     userQuestion = '';
     result = '';
   }
+
+  void addToUserQuestion(String digit) {
+    userQuestion += digit;
+  }
 }
