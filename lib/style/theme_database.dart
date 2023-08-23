@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 class ThemeDatabase {
-  bool isDark = Hive.box('themeData').get('isDark');
+  bool isDark = (Hive.box('themeData').isEmpty)?false:Hive.box('themeData').get('isDark');
 
   var database = Hive.box('themeData');
 

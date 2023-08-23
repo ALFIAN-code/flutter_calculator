@@ -19,7 +19,7 @@ class _HomepageState extends State<Homepage> {
   var database = Hive.box('themeData');
   var appColor = AppColor();
   ThemeDatabase theme = ThemeDatabase();
-  CalculateFunction _calculateFunction = CalculateFunction();
+  final CalculateFunction _calculateFunction = CalculateFunction();
 
   final List<String> operatorButtons = [
     'AC',
@@ -97,7 +97,7 @@ class _HomepageState extends State<Homepage> {
                   child: Text(
                     _calculateFunction.userQuestion,
                     textAlign: TextAlign.right,
-                    style: medium22.copyWith(
+                    style: regular22.copyWith(
                         color: appColor.textColor.withOpacity(0.5)),
                   ),
                 ),
@@ -116,7 +116,7 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                     Text(
-                      '2004',
+                      _calculateFunction.result,
                       style: semiBold40.copyWith(color: appColor.textColor),
                     )
                   ],
@@ -299,19 +299,26 @@ class _HomepageState extends State<Homepage> {
                                   ),
                                   Expanded(
                                     flex: 3,
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                          color: theme.isDark
-                                              ? const Color(0xff050505)
-                                                  .withOpacity(.2)
-                                              : Colors.white.withOpacity(0.4),
-                                          borderRadius:
-                                              BorderRadius.circular(1000)),
-                                      child: Center(
-                                        child: Text(operatorButtons[6],
-                                            style: semibold26.copyWith(
-                                                color: appColor.textColor)),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _calculateFunction.equalFunction();
+                                        });
+                                      },
+                                      child: Container(
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            color: theme.isDark
+                                                ? const Color(0xff050505)
+                                                    .withOpacity(.2)
+                                                : Colors.white.withOpacity(0.4),
+                                            borderRadius:
+                                                BorderRadius.circular(1000)),
+                                        child: Center(
+                                          child: Text(operatorButtons[6],
+                                              style: semibold26.copyWith(
+                                                  color: appColor.textColor)),
+                                        ),
                                       ),
                                     ),
                                   )

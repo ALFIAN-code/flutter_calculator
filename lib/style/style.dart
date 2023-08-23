@@ -19,9 +19,9 @@ List<Color> gradientDark = [const Color(0xff2A7DA1), const Color(0xff224E91)];
 
 // fonts
 TextStyle regular22 = GoogleFonts.poppins(
-    textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400));
+    textStyle: const TextStyle(fontSize: 30, fontWeight: FontWeight.w400));
 TextStyle medium22 = GoogleFonts.poppins(
-    textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w500));
+    textStyle: const TextStyle(fontSize: 30, fontWeight: FontWeight.w500));
 TextStyle semibold22 = GoogleFonts.poppins(
     textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600));
 
